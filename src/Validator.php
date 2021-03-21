@@ -215,7 +215,7 @@ class Validator extends BaseValidator implements ValidatorInterface
      */
     public static function __callStatic(string $ruleName, array $arguments): ValidatorInterface
     {
-        return self::createOrExisting()->__call($ruleName, $arguments);
+        return (new static())->__call($ruleName, $arguments);
     }
 
     /**
