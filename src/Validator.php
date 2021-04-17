@@ -6,6 +6,7 @@ namespace Pollen\Validation;
 
 use Exception;
 use finfo;
+use Pollen\Support\Exception\ManagerRuntimeException;
 use Pollen\Validation\Rules\PasswordRule;
 use Pollen\Validation\Rules\SerializedRule;
 use Respect\Validation\Exceptions\ValidationException;
@@ -212,6 +213,23 @@ class Validator extends BaseValidator implements ValidatorInterface
 
     /**
      * @inheritDoc
+     *
+     * @throws Exception
+     */
+    public function __call(string $ruleName, array $arguments): ValidatorInterface
+    {
+        if (isset(static::$customs[$ruleName])) {
+            /** @var Validatable $rule */
+            $rule = clone static::$customs[$ruleName]->setArgs($arguments);
+            $this->addRule($rule);
+        } else {
+            $this->addRule(Factory::getDefaultInstance()->rule($ruleName, $arguments));
+        }
+        return $this;
+    }
+
+    /**
+     * @inheritDoc
      */
     public static function __callStatic(string $ruleName, array $arguments): ValidatorInterface
     {
@@ -227,23 +245,6 @@ class Validator extends BaseValidator implements ValidatorInterface
             return self::$instance;
         }
         return new static();
-    }
-
-    /**
-     * @inheritDoc
-     *
-     * @throws Exception
-     */
-    public function __call(string $ruleName, array $arguments): ValidatorInterface
-    {
-        if (isset(static::$customs[$ruleName])) {
-            /** @var Validatable $rule */
-            $rule = clone static::$customs[$ruleName]->setArgs($arguments);
-            $this->addRule($rule);
-        } else {
-            $this->addRule(Factory::getDefaultInstance()->rule($ruleName, $arguments));
-        }
-        return $this;
     }
 
     /**
