@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Pollen\Validation;
 
-use Pollen\Container\BaseServiceProvider;
+use Pollen\Container\BootableServiceProvider;
 
-class ValidationServiceProvider extends BaseServiceProvider
+class ValidationServiceProvider extends BootableServiceProvider
 {
     /**
      * @var string[]
