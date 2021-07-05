@@ -220,7 +220,7 @@ class Validator extends BaseValidator implements ValidatorInterface
     {
         if (isset(static::$customs[$ruleName])) {
             /** @var Validatable $rule */
-            $rule = clone static::$customs[$ruleName]->setArgs($arguments);
+            $rule = clone static::$customs[$ruleName]->setArgs(...$arguments);
             $this->addRule($rule);
         } else {
             $this->addRule(Factory::getDefaultInstance()->rule($ruleName, $arguments));

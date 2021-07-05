@@ -65,7 +65,7 @@ class PasswordRule extends AbstractRule
         );
 
         foreach ($args as $k => $v) {
-            if (in_array($k, array_keys($defaults))) {
+            if (array_key_exists($k, $defaults)) {
                 $this->{$k} = (int)$v;
             }
         }
@@ -78,11 +78,11 @@ class PasswordRule extends AbstractRule
     public function validate($input): bool
     {
         try {
-            if ($this->min && !(new Length($this->min))->validate($input)) {
+            if ($this->min > 0 && !(new Length($this->min))->validate($input)) {
                 return false;
             }
 
-            if ($this->max && !(new Length(null, $this->max))->validate($input)) {
+            if ($this->max > 0 && !(new Length(null, $this->max))->validate($input)) {
                 return false;
             }
 
