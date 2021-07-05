@@ -7,13 +7,12 @@
     "component",
     "validation"
   ],
-  "time": "2021-05-11",
+  "time": "2021-07-05",
   "license": "MIT",
   "authors": [
     {
       "name": "Jordy Manner",
-      "email": "jordy@presstify.com",
-      "role": "Developper"
+      "email": "jordy@presstify.com"
     }
   ],
   "repositories": [
@@ -23,15 +22,14 @@
     }
   ],
   "require": {
-    "php": ">=7.3",
-    "composer/composer": "^2.0",
-    "composer/installers": "~1.0",
+    "php": "^7.4 || ^8.0",
     "egulias/email-validator": "^3.0",
     "respect/validation": "^2.1",
     "symfony/validator": "^5.2"
   },
   "require-dev": {
-    "phpunit/phpunit": "^9.0"
+    "phpunit/phpunit": "^9.0",
+    "roave/security-advisories": "dev-latest"
   },
   "autoload": {
     "psr-4": {
