@@ -12,40 +12,40 @@ use Respect\Validation\Exceptions\ComponentException;
 class PasswordRule extends AbstractRule
 {
     /**
-     * Nombre de chiffres requis.
+     * Number of digits required.
      * @var int
      */
-    protected $digit = 1;
+    protected int $digit = 1;
 
     /**
-     * Nombre de minuscules requises.
+     * Number of lower case letters required.
      * @var int
      */
-    protected $lower = 1;
+    protected int $lower = 1;
 
     /**
-     * Longueur maximum.
+     * Maximum number of characters.
      * @var int
      */
-    protected $max = 0;
+    protected int $max = 0;
 
     /**
-     * Longueur minimum.
+     * Minimum number of characters.
      * @var int
      */
-    protected $min = 8;
+    protected int $min = 8;
 
     /**
-     * Nombre de caractères spéciaux requis.
+     * Number of special characters required.
      * @var int
      */
-    protected $special = 0;
+    protected int $special = 0;
 
     /**
-     * Nombre de majuscules requises.
+     * Number of uppercase letters required.
      * @var int
      */
-    protected $upper = 1;
+    protected int $upper = 1;
 
     /**
      * @inheritDoc

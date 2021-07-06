@@ -6,7 +6,6 @@ namespace Pollen\Validation;
 
 use Exception;
 use finfo;
-use Pollen\Support\Exception\ManagerRuntimeException;
 use Pollen\Validation\Rules\PasswordRule;
 use Pollen\Validation\Rules\SerializedRule;
 use Respect\Validation\Exceptions\ValidationException;
@@ -180,16 +179,16 @@ use Symfony\Component\Validator\Constraint;
 class Validator extends BaseValidator implements ValidatorInterface
 {
     /**
-     * Instance de la classe.
+     * Validator main instance.
      * @var static|null
      */
-    private static $instance;
+    private static ?ValidatorInterface $instance = null;
 
     /**
-     * Liste des régles personnalisées.
+     * Custom validation rules.
      * @var ValidationRuleInterface[]|array
      */
-    protected static $customs = [];
+    protected static array $customs = [];
 
     /**
      * @param Validatable ...$rules
@@ -218,14 +217,17 @@ class Validator extends BaseValidator implements ValidatorInterface
      */
     public function __call(string $ruleName, array $arguments): ValidatorInterface
     {
+        $instance = new self();
+
         if (isset(static::$customs[$ruleName])) {
             /** @var Validatable $rule */
             $rule = clone static::$customs[$ruleName]->setArgs(...$arguments);
-            $this->addRule($rule);
+            $instance->addRule($rule);
         } else {
-            $this->addRule(Factory::getDefaultInstance()->rule($ruleName, $arguments));
+            $instance->addRule(Factory::getDefaultInstance()->rule($ruleName, $arguments));
         }
-        return $this;
+
+        return $instance;
     }
 
     /**

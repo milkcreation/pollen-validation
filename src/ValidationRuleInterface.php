@@ -9,9 +9,9 @@ use Respect\Validation\Validatable;
 interface ValidationRuleInterface extends Validatable
 {
     /**
-     * Définition de la liste des arguments.
+     * Set the list of passed arguments.
      *
-     * @param array ...$args
+     * @param mixed ...$args
      *
      * @return static
      */
