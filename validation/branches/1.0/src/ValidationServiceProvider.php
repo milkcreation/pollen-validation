@@ -4,13 +4,10 @@ declare(strict_types=1);
 
 namespace Pollen\Validation;
 
-use Pollen\Container\BootableServiceProvider;
+use Pollen\Container\ServiceProvider;
 
-class ValidationServiceProvider extends BootableServiceProvider
+class ValidationServiceProvider extends ServiceProvider
 {
-    /**
-     * @var string[]
-     */
     protected $provides = [
         ValidatorInterface::class
     ];

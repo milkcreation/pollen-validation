@@ -9,10 +9,10 @@ use Pollen\Validation\ValidationRuleInterface;
 class SerializedRule extends AbstractRule
 {
     /**
-     * Mode de vérification.
-     * @var boolean $strict
+     * Verification mode.
+     * @var bool $strict
      */
-    protected $strict = true;
+    protected bool $strict = true;
 
     /**
      * @inheritDoc
@@ -34,7 +34,7 @@ class SerializedRule extends AbstractRule
         }
 
         $input = trim($input);
-        if ('N;' == $input) {
+        if ('N;' === $input) {
             return true;
         }
 
@@ -72,7 +72,7 @@ class SerializedRule extends AbstractRule
         switch ($token) {
             case 's':
                 if ($this->strict) {
-                    if ('"' !== substr($input, -2, 1)) {
+                    if ('"' !== $input[strlen($input) - 2]) {
                         return false;
                     }
                 } elseif (false === strpos($input, '"')) {
@@ -81,14 +81,12 @@ class SerializedRule extends AbstractRule
                 break;
             case 'a':
             case 'O':
-                return (bool)preg_match("/^{$token}:[0-9]+:/s", $input);
-                break;
+                return (bool)preg_match("/^$token:[0-9]+:/s", $input);
             case 'b':
             case 'i':
             case 'd':
                 $end = $this->strict ? '$' : '';
-                return (bool)preg_match("/^{$token}:[0-9.E-]+;$end/", $input);
-                break;
+                return (bool)preg_match("/^$token:[0-9.E-]+;$end/", $input);
         }
 
         return false;

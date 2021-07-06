@@ -19,7 +19,7 @@ interface ValidatorInterface
      * Creates a new Validator instance with a rule that was called on the static method.
      *
      * @param string $ruleName
-     * @param mixed[] $arguments
+     * @param array $arguments
      *
      * @return static
      *
@@ -40,14 +40,14 @@ interface ValidatorInterface
     public function __call(string $ruleName, array $arguments): ValidatorInterface;
 
     /**
-     * Récupération de l'instance courante.
+     * Get main instance or create a new instance.
      *
      * @return static
      */
     public static function createOrExisting(): ValidatorInterface;
 
     /**
-     * Définition d'une régle personnalisée.
+     * Set a custom validation rule.
      *
      * @param string $name
      * @param Validatable $rule
