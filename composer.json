@@ -1,13 +1,13 @@
 {
   "name": "pollen-solutions/validation",
   "description": "Pollen Validation Component - Validation values tools.",
-  "homepage": "https://www.presstify.com/pollen-solutions/validation/",
+  "homepage": "https://github.com/milkcreation/pollen-validation.git",
   "keywords": [
     "pollen-solutions",
     "component",
     "validation"
   ],
-  "time": "2021-07-06",
+  "time": "2021-09-15",
   "license": "MIT",
   "authors": [
     {
